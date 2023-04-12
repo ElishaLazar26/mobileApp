@@ -13,14 +13,20 @@ import {
 } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import OrderComplete from './OrderComplete';
+import CannelOrder from "./CannelOrder"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React, { useEffect, useState } from "react";
 import Footer from './Footer';
 
 
+
 const OrderHistory = () => {
     const [language, setlanguage] = useState("")
+    const [token, settoken] = useState(null)
+    const [OrderCannel, setOrderCannel] = useState([])
+    const [cannelCount, setCannelCount] = useState(0)
+    
     const getDatalanguage = async () => {
       try {
         const value = await AsyncStorage.getItem("language");
@@ -86,8 +92,42 @@ const OrderHistory = () => {
         color: "white",
         marginTop: 4,
       };
-    
+      const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem("token");
 
+          settoken(value);
+        } catch (e) {
+          // error reading value
+        }
+      };
+      useEffect(() => {
+        getData();
+      });
+      const HnadleCannel = () => {
+        console.log("----rung----");
+        fetch(
+          `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/orders?status=25&PageNo=1`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`, // SET HEADER IN TOKEN
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setOrderCannel(data?.result);
+            // setIncomingCount(data?.Count);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      useEffect(() => {
+        HnadleCannel()
+      }, [token])
+    //   console.log(OrderCannel,' OrderCannel')
     return (
         
         <>
@@ -134,6 +174,7 @@ const OrderHistory = () => {
                 >
                     <View>
                         <View style={{ flexDirection: "row" }}>
+                            <Text>{cannelCount}</Text>
                             <Text
                                 onPress={() => toggleTab(1)}
                                 style={
@@ -143,6 +184,7 @@ const OrderHistory = () => {
                                   }
                     
                                 >
+                                    
                              {language === 'english' ? "Cancel Orders": "Hylätyt tilaukset"}
                         
                             </Text>
@@ -205,159 +247,7 @@ const OrderHistory = () => {
                 </View>
             </View>
             {toggleState === 1 ? <>
-                <View style={{ marginTop: 20 }}>
-                <TouchableOpacity
-                onPress={() => navigation.navigate("CancelORderDetails")}
-
-
-                    style={{
-                        borderWidth: 2,
-                        width: "90%",
-                        marginLeft: 20,
-                        borderRadius: 20,
-                        borderColor: "#DFDFDF",
-                        zIndex: 100000,
-                        backgroundColor: "white",
-                    }}
-                >
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            width: "90%",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontSize: 20,
-                                fontWeight: "900",
-                                paddingLeft: 20,
-                                paddingTop: 20,
-                                // borderWidth:1
-                            }}
-                        >
-                            #892333
-                        </Text>
-                        <View style={{ marginTop: 20 }}>
-
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    width: 70,
-                                    justifyContent: "space-between",
-                                }}
-                            >
-                                <Image
-                                    style={{ marginTop: 4 }}
-                                    source={require("../assets/pickupred.png")}
-                                />
-                                <Text
-                                    style={{
-                                        color: "rgba(238, 84, 94, 1)",
-                                        fontSize: 16,
-                                        fontWeight: "800",
-                                        // marginLeft: 5,
-                                    }}
-                                >
-                                       {language === 'english' ? "Pickup": "Nouto"}
-                                    {/* {props.route.params.Language ? text.Pickup : text.Pickupaltenate} */}
-                                </Text>
-                            </View>
-
-
-                        </View>
-                    </View>
-                    <Text
-                        style={{
-                            fontSize: 18,
-                            marginLeft: 20,
-                            marginTop: 10,
-                        }}
-                    >
-                        jack will
-                    </Text>
-                    <Text
-                        style={{
-                            fontSize: 15,
-                            marginLeft: 20,
-                            color: "#898989",
-                            marginTop: 2,
-                        }}
-                    >
-                        +332 8329 8923
-                    </Text>
-
-                    <Text
-                        style={{
-                            fontSize: 15,
-                            marginLeft: 20,
-                            marginTop: 5,
-
-                        }}
-                    >
-                        July 2, 2022, at 2:00 pm
-                    </Text>
-
-
-                    <View
-                        style={{
-                            backgroundColor: "#F5F5F5",
-                            width: "90%",
-                            marginLeft: 20,
-                            marginTop: 15,
-                            padding: 20,
-                            borderRadius: 15,
-                        }}
-                    >
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                width: "100%",
-                            }}
-                        ></View>
-
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                width: "100%",
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    fontSize: 25,
-                                    fontWeight: "400",
-                                    paddingTop: 5,
-                                    width: "80%",
-                                    lineHeight: 25,
-                                    fontWeight: "800",
-                                }}
-                            >
-                         {language === 'english' ? "Total": "Total"}
-
-                            </Text>
-                            <Text
-                                style={{
-                                    fontSize: 20,
-                                    fontWeight: "400",
-                                    paddingTop: 5,
-                                    width: "80%",
-                                    lineHeight: 25,
-                                    fontWeight: "800",
-                                }}
-                            >
-                                €90.00
-                            </Text>
-                        </View>
-                    </View>
-
-                <View style={{ marginTop: 20 }}></View>
-
-                </TouchableOpacity>
-
-        
-            </View>
+                <><CannelOrder setCannelCount={setCannelCount} token={token}/></> 
             </> : null}
             {toggleState === 2 ? <><OrderComplete/></> : null}
   

@@ -18,7 +18,7 @@ const DailyPayment = ({route}) => {
     const getData = async () => {
         try {
           const value = await AsyncStorage.getItem("token");
-          console.log(value, "joshua token");
+    
           settoken(value);
         } catch (e) {
           // error reading value
@@ -29,7 +29,7 @@ const DailyPayment = ({route}) => {
       });
       const HandleInCommingOrder = () => {
         console.log("----rung----");
-        fetch(`https://delivigo-api.herokuapp.com/api/v5/restaurant/payout/detail?Date=${dataFOrmatset}`, {
+        fetch(`https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/payout/detail?Date=${dataFOrmatset}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`, // SET HEADER IN TOKEN

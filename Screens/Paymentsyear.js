@@ -14,7 +14,7 @@ const Paymentsyear = ({route}) => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
-      console.log(value, "joshua token");
+
       settoken(value);
     } catch (e) {
       // error reading value
@@ -29,7 +29,7 @@ const Paymentsyear = ({route}) => {
   const HandleInMonthlyPayment = () => {
     console.log("----rung----");
     fetch(
-      `https://delivigo-api.herokuapp.com/api/v5/restaurant/payout/month?Date=${data.Date}`,
+      `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/payout/month?Date=${data.Date}`,
       {
         method: "GET",
         headers: {

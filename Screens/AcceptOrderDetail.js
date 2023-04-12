@@ -1,11 +1,6 @@
 import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    ScrollView,
-    TouchableOpacity,
-    Alert, Pressable
+    StyleSheet,Text,View,Image,ScrollView,TouchableOpacity,
+Alert, Pressable
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -13,7 +8,7 @@ import moment from "moment/moment";
 import Footer from "./Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const OrderDetails = ({ route }) => {
+const OrderDetails = ({ route,props }) => {
     const navigation = useNavigation();
     const [unprice, setfUnprice] = useState(0);
     const [counter, setCounter] = useState(0);
@@ -91,7 +86,7 @@ const OrderDetails = ({ route }) => {
             setOpen4(false);
         }
     };
-    const objecttyleVild = {
+    const itemecttyleVild = {
         flexDirection: "row",
         backgroundColor: "white",
         width: 50,
@@ -100,7 +95,7 @@ const OrderDetails = ({ route }) => {
         paddingTop: 5,
         paddingLeft: 11,
     }
-    const objecttyleVild2 = {
+    const itemecttyleVild2 = {
         flexDirection: "row",
         backgroundColor: "blue",
         color: "white",
@@ -110,14 +105,14 @@ const OrderDetails = ({ route }) => {
         paddingTop: 5,
         paddingLeft: 11,
     }
-    // console.log(route.params.obj.OrderId, 'joshua')
-    let data = route.params.obj;
-    let datatoken = route.params.token;
-    console.log(datatoken)
+    // console.log(route.params.item.OrderId, 'joshua')
+    let data = route.params.item;
+    // let datatoken = route.params.token;
+    // console.log(datatoken)
     let unitPrice;
     let Ingredient;
 
-    console.log(moment(route.params.obj.OrderPlaceTime).format("h:mm a"), "timw");
+    // console.log(moment(route.params.item.OrderPlaceTime).format("h:mm a"), "timw");
 
     const TotalPrie = () => {
         const UnitPrice = data.Scales?.map((items) => {
@@ -126,8 +121,8 @@ const OrderDetails = ({ route }) => {
                 //   let interged = item.IngredientsType?.map((ruf) =>{
                 //     console.log(ruf.Name)
                 //   })
-                let sum = item.IngredientsType.reduce((accumulator, object) => {
-                    return accumulator + object.UnitPrice;
+                let sum = item.IngredientsType.reduce((accumulator, itemect) => {
+                    return accumulator + itemect.UnitPrice;
                 }, 0);
                 console.log(sum);
                 Ingredient = sum;
@@ -135,8 +130,8 @@ const OrderDetails = ({ route }) => {
             });
         });
 
-        // let sum = items.Ingredient.IngredientType.reduce((accumulator, object) => {
-        //     return accumulator + object.UnitPrice;
+        // let sum = items.Ingredient.IngredientType.reduce((accumulator, itemect) => {
+        //     return accumulator + itemect.UnitPrice;
 
         // }, 0);
         //   console.log(sum)
@@ -171,7 +166,7 @@ const OrderDetails = ({ route }) => {
         console.log(id, time, data.ETATime)
         const date = new Date();
         fetch(
-            `https://delivigo-api.herokuapp.com/api/v5/restaurant/order/process`,
+            `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/order/process`,
             {
                 method: "POST",
                 headers: {
@@ -206,7 +201,7 @@ const OrderDetails = ({ route }) => {
         console.log(id, time, data.ETATime)
         const date = new Date();
         fetch(
-            `https://delivigo-api.herokuapp.com/api/v5/restaurant/order/process`,
+            `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/order/process`,
             {
                 method: "POST",
                 headers: {
@@ -492,8 +487,8 @@ const OrderDetails = ({ route }) => {
 
                 <Text style={{ fontSize: 15, paddingLeft: 45, color: "#898989" }}>
                     {" "}
-                    {route.params.obj.OrderPlaceTime
-                        ? moment(route.params.obj.OrderPlaceTime).format("h:mm a")
+                    {route.params.item.OrderPlaceTime
+                        ? moment(route.params.item.OrderPlaceTime).format("h:mm a")
                         : null}
                 </Text>
             </View>
@@ -502,8 +497,8 @@ const OrderDetails = ({ route }) => {
                     {`\u2022`} {language === 'english' ? "Accepted": "Hyväksytty"}{" "}
                 </Text>
                 <Text style={{ fontSize: 15, paddingLeft: 45, color: "#898989" }}>
-                    {route.params.obj.OrderCompleteTime
-                        ? moment(route.params.obj.OrderCompleteTime).format("h:mm a")
+                    {route.params.item.OrderCompleteTime
+                        ? moment(route.params.item.OrderCompleteTime).format("h:mm a")
                         : null}
                 </Text>
             </View>
@@ -535,8 +530,8 @@ const OrderDetails = ({ route }) => {
                     }}
                 >
                     {" "}
-                    {route.params.obj.RiderTime
-                        ? moment(route.params.obj.RiderTime).format("h:mm a")
+                    {route.params.item.RiderTime
+                        ? moment(route.params.item.RiderTime).format("h:mm a")
                         : null}
                 </Text>
             </View>
@@ -595,7 +590,7 @@ const OrderDetails = ({ route }) => {
                     // style={{backgroundColor:"red"}}
                     >
                         <View
-                            style={active === 5 ? objecttyleVild2 : objecttyleVild}
+                            style={active === 5 ? itemecttyleVild2 : itemecttyleVild}
                         // style={{
                         //   flexDirection: "row",
                         //   backgroundColor: "white",
@@ -648,7 +643,7 @@ const OrderDetails = ({ route }) => {
                     >
 
                         <View
-                            style={active === 10 ? objecttyleVild2 : objecttyleVild}
+                            style={active === 10 ? itemecttyleVild2 : itemecttyleVild}
                         // style={{
                         //   flexDirection: "row",
                         //   backgroundColor: "white",
@@ -701,7 +696,7 @@ const OrderDetails = ({ route }) => {
                         onPress={(e) => HandleActive(e, 15)}
                     >
                         <View
-                            style={active === 15 ? objecttyleVild2 : objecttyleVild}
+                            style={active === 15 ? itemecttyleVild2 : itemecttyleVild}
                         // style={{
                         //   flexDirection: "row",
                         //   backgroundColor: "white",
@@ -753,7 +748,7 @@ const OrderDetails = ({ route }) => {
                         onPress={(e) => HandleActive(e, 20)}
                     >
                         <View
-                            style={active === 20 ? objecttyleVild2 : objecttyleVild}
+                            style={active === 20 ? itemecttyleVild2 : itemecttyleVild}
                         // style={{
                         //   flexDirection: "row",
                         //   backgroundColor: "white",
@@ -805,7 +800,7 @@ const OrderDetails = ({ route }) => {
                     // }}
                     >
                         <View
-                            style={active === 25 ? objecttyleVild2 : objecttyleVild}
+                            style={active === 25 ? itemecttyleVild2 : itemecttyleVild}
                         // style={{
                         //   flexDirection: "row",
                         //   backgroundColor: "white",

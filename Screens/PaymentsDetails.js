@@ -43,7 +43,7 @@ const PaymentsDetails = ({ route }) => {
   const HandleInCommingOrder = () => {
     // console.log("----rung----");
     fetch(
-      `https://delivigo-api.herokuapp.com/api/v5/restaurant/order/by/id?orderId=${data?.GuID}`,
+      `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/order/by/id?orderId=${data?.GuID}`,
       {
         method: "GET",
         headers: {
@@ -64,7 +64,6 @@ const PaymentsDetails = ({ route }) => {
   }, [token]);
 
 
-console.log(token, 'token')
   return (
 
     <>

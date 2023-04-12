@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FlatList, View, Text, Button,
+  FlatList, View, Text, Button,TouchableOpacity,ActivityIndicator,
   Pressable, Image
 } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -13,8 +13,25 @@ const PAGE_SIZE = 10;
 
 
 
-const ReadyList = () => {
+const  ReadyList = (props) => {
   const navigation = useNavigation();
+
+  // new code 
+  const PAGE_SIZE = 10; // number of items to display per page
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [DATA, setDATA] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [DATAlength, setDATAlength] = useState(1);
+
+  const totalPages = Math.ceil(DATAlength / PAGE_SIZE);
+  // const totalPages = DATAlength / PAGE_SIZE
+
+ // *Recvied Token props
+  console.log(props.props?.token, 'read')
+
+  let myToken = props?.props?.token;
+
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -22,7 +39,7 @@ const ReadyList = () => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
-      console.log(value, "joshua token");
+   
       settoken(value);
     } catch (e) {
       // error reading value
@@ -44,40 +61,50 @@ const ReadyList = () => {
   useEffect(() => {
     getDatalanguage();
   });
+
   const fetchData = async () => {
-    const response = await fetch(`https://delivigo-api.herokuapp.com/api/v5/restaurant/orders?status=40&PageNo=${page}`, {
+    setisLoading(true)
+    if(myToken)
+    {
+      const response = await fetch(
 
+        `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/orders?status=40&PageNo=${currentPage}`,
+        {
+          headers: {
+            Authorization: `Bearer ${myToken}`
+          },
+        }
+      );
+      const newData = await response.json();
+      setDATA(newData?.result);
+      setDATAlength(newData?.Count);
+      props.setIncomingCount(newData?.Count)
+    }
 
-      headers: {
-        Authorization: `Bearer ${token}`, // SET HEADER IN TOKEN
-      },
-
-    });
-    const newData = await response.json();
-    setData([...data, ...newData.result]);
-    setPage(page);
-
+    
   };
 
-  console.log(data, 'd')
-
   useEffect(() => {
+    setisLoading(true)
     fetchData();
-    setPage(page);
+    setTimeout(() => {
+    setisLoading(false) 
+      
+    }, 2000);
+  
+  
+  }, [currentPage]);
 
-  }, [page]);
 
-
-
-  const handleLoadMore = () => {
-  setPage(page+1);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
 
   };
   
 
   console.log(page)
 
-
+let num ;
   const renderItem = ({ item, index }) => {
     num = Number(item.DeliveryDistance / 1000).toFixed(2);
     return (
@@ -86,7 +113,7 @@ const ReadyList = () => {
           // onPress={() => navigation.navigate("ReadyOrderDetail")}
           onPress={() =>
             navigation.push("ReadyOrderDetail", {
-              item,
+              item
             })
           }
         >
@@ -104,6 +131,7 @@ const ReadyList = () => {
                 // marginRight:20
               }}
             >
+              {/* <Text>{index}</Text> */}
              
               <View
                 style={{
@@ -175,6 +203,7 @@ const ReadyList = () => {
                       marginTop: 5,
                     }}
                   >
+                   
                     {item.IsSchedule === true ? (
                       <View
                         style={{
@@ -195,10 +224,10 @@ const ReadyList = () => {
                         >
                           {language === "english" ? "Schedule" : "Ajasta"}
                         </Text>
-                        <Image
+                        {/* <Image
                           style={{ marginTop: -5, width: 60, height: 60 }}
                           source={require("../assets/phone.png")}
-                        />
+                        /> */}
                       </View>
                     ) : null}
                   </View>
@@ -226,7 +255,7 @@ const ReadyList = () => {
                     <Text
                       style={{ fontSize: 17, padding: 5, marginTop: 5 }}
                     >
-                      Harry will
+                      {item?.DriveName ? item?.DriveName : "not found"}
                     </Text>
                   </View>
                 </>
@@ -301,16 +330,57 @@ const ReadyList = () => {
     )
   };
 
+  const renderPaginationControls = () => {
+    const pages = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <View>
+          
+           
+   <TouchableOpacity
+          key={i}
+          onPress={() => handlePageChange(i)}
+          style={{ padding: 10 }}
+        >
+        <Text style={{
+          height:20,
+          width:20,
+          color:"white",
+          display:"flex",
+          backgroundColor: "#2973CC",
+           textAlign:"center"
+           }}>{i}</Text>
+        </TouchableOpacity>
+        </View>
+     
+      );
+    }
+
+    return <View style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>{pages}</View>;
+  };
+
+  const startItemIndex = (currentPage - 1) * PAGE_SIZE;
+  const endItemIndex = startItemIndex + PAGE_SIZE;
 
 
   return (
+    <View>
+    {DATA.length > 0 ? <View>
+
+      {isLoading ?  <View><ActivityIndicator size="large" /></View> : <View>
     <FlatList
-      data={data}
-      keyExtractor={(item) => item.id} renderItem={renderItem}
-      //       onEndReached={handleLoadMore}
-      onEndReachedThreshold={0.5}
-      ListFooterComponent={<Button title="Load More" onPress={handleLoadMore} />}
+      // data={DATA.slice(startItemIndex, endItemIndex)}
+      data={DATA}
+      renderItem={renderItem}
+      keyExtractor={(item ) => item.id}
     />
+    {renderPaginationControls()}
+      </View>}
+    </View> : <View><ActivityIndicator size="large" /></View>}
+
+   
+  </View>
   );
 };
 

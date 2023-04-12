@@ -1,0 +1,182 @@
+[
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_location.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_location.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_cdown.jpeg.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_cdown.jpeg"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_cycle.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_cycle.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_profilepic.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_profilepic.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_back.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_back.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_footerprofile.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_footerprofile.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_payaroow.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_payaroow.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_pickupred.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_pickupred.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_bar.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_bar.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_clock.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_clock.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_bike.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_bike.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_sheduler.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_sheduler.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_dashboad.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_dashboad.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.restaurantmanager.app-main-30:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_footerorder.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_footerorder.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_reilu.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_reilu.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_paymenting.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_paymenting.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_flagoutside.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_flagoutside.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_bill.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_bill.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_node_modules_reactnativepaper_src_assets_backchevron.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/node_modules_reactnativepaper_src_assets_backchevron.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_pickup.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_pickup.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_down.jpeg.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_down.jpeg"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_intersect.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_intersect.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_flaglogo.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_flaglogo.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_celcender.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_celcender.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_contactpic.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_contactpic.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_x.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_x.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_phone.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_phone.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/drawable-mdpi_assets_dropdown.png.flat",
+        "source": "com.restaurantmanager.app-react-24:/drawable-mdpi/assets_dropdown.png"
+    },
+    {
+        "merged": "com.restaurantmanager.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.restaurantmanager.app-main-30:/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]

@@ -111,13 +111,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
       paddingLeft: 10,
     }
     // console.log(route.params.obj.OrderId, 'joshua')
-    let data = route.params.obj;
+    let data = route.params.item;
     let datatoken = route.params.token;
   console.log(datatoken)
-    let unitPrice;
+    // let unitPrice;zZ
     let Ingredient;
   
-    console.log(moment(route.params.obj.OrderPlaceTime).format("h:mm a"), "timw");
+    // console.log(moment(route.params.obj.OrderPlaceTime).format("h:mm a"), "timw");
   
     const TotalPrie = () => {
       const UnitPrice = data.Scales?.map((items) => {
@@ -170,8 +170,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
   const HandleTimeupdateAndAccept = (e, id , time) => {
     console.log(id, time, data.ETATime )
     const date = new Date();
+
     fetch(
-      `https://delivigo-api.herokuapp.com/api/v5/restaurant/order/process`,
+      `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/order/process`,
       {
         method: "POST",
         headers: {
@@ -191,7 +192,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, " data");
+       data.ResultMessages?.map((message) => {
+          // console.log(message.MessageType)
+          // Alert.alert(message.Message)
+          if(message.MessageType === "success")
+          {
+            Alert.alert(message.Message)       
+            navigation.navigate('Incoming')
+          }
+          else if(message.MessageType === "danger")
+          {
+            Alert.alert(message.Message)
+
+          }
+        })
+        
         
         // setIncomming(data?.result)
   
@@ -206,7 +221,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
     console.log(id, time, data.ETATime )
     const date = new Date();
     fetch(
-      `https://delivigo-api.herokuapp.com/api/v5/restaurant/order/process`,
+      `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/order/process`,
       {
         method: "POST",
         headers: {
@@ -491,8 +506,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
   
           <Text style={{ fontSize: 15, paddingLeft: 45, color: "#898989" }}>
             {" "}
-            {route.params.obj.OrderPlaceTime
-              ? moment(route.params.obj.OrderPlaceTime).format("h:mm a")
+            {route.params.item.OrderPlaceTime
+              ? moment(route.params.item.OrderPlaceTime).format("h:mm a")
               : null}
           </Text>
         </View>
@@ -501,8 +516,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
             {`\u2022`} {language === 'english' ? "Accepted": "Hyväksytty"}{" "}
           </Text>
           <Text style={{ fontSize: 15, paddingLeft: 45, color: "#898989" }}>
-            {route.params.obj.OrderCompleteTime
-              ? moment(route.params.obj.OrderCompleteTime).format("h:mm a")
+            {route.params.item.OrderCompleteTime
+              ? moment(route.params.item.OrderCompleteTime).format("h:mm a")
               : null}
           </Text>
         </View>
@@ -534,8 +549,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
             }}
           >
             {" "}
-            {route.params.obj.OrderDeliveredTime
-              ? moment(route.params.obj.OrderDeliveredTime).format("h:mm a")
+            {route.params.item.OrderDeliveredTime
+              ? moment(route.params.item.OrderDeliveredTime).format("h:mm a")
               : null}
           </Text>
         </View>
@@ -627,8 +642,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
                   }}
                 >
                   <Text
-                    style={{ color: "white", fontSize: 20, fontWeight: "800" }}
-                  >
+                    style={{ color: "white", fontSize: 20, fontWeight: "800" }}>
+  
                     +5
                   </Text>
                 </View>
@@ -1324,4 +1339,4 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
   export default OrderDetails;
   
   const styles = StyleSheet.create({});
-  
+   

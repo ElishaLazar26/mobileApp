@@ -44,7 +44,7 @@ const OrderComplete = () => {
     const getData = async () => {
         try {
           const value = await AsyncStorage.getItem("token");
-          console.log(value, "joshua token");
+
           settoken(value);
         } catch (e) {
           // error reading value
@@ -54,10 +54,11 @@ const OrderComplete = () => {
         getData();
       });
 
+
       const HandleOrderCompelete70 = () => {
         console.log("----rung----");
         fetch(
-          `https://delivigo-api.herokuapp.com/api/v5/restaurant/orders?status=70&PageNo=1`,
+          `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/orders?status=70&PageNo=1`,
           {
             method: "GET",
             headers: {
@@ -79,7 +80,7 @@ console.log(orderComplete, 'orderComplete')
 const HandleOrderCompelete80 = () => {
     console.log("----rung----");
     fetch(
-      `https://delivigo-api.herokuapp.com/api/v5/restaurant/orders?status=80&PageNo=1`,
+      `https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/orders?status=80&PageNo=1`,
       {
         method: "GET",
         headers: {
@@ -172,7 +173,15 @@ useEffect(() => {
                     <View>
                          <View style={{ marginTop: 20 }}>
                 <Pressable 
-                 onPress={() => navigation.navigate("CompleteOrderDetail")}>
+                //  onPress={() => navigation.navigate("CompleteOrderDetail")}
+                onPress={() =>
+                  navigation.push("CompleteOrderDetail", {
+                   obj,
+                    token,
+                  })
+                }
+                 
+                 >
                 <View
                     style={{
                         borderWidth: 2,
@@ -367,8 +376,8 @@ useEffect(() => {
                                     fontWeight: "800",
                                 }}
                             >
-                                €Backend
-                            </Text>
+                                €{obj.ItemSubTotal}                          
+                                  </Text>
                         </View>
                     </View>
 

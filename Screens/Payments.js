@@ -21,7 +21,7 @@ const Payments = () => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
-      console.log(value, "joshua token");
+
       settoken(value);
     } catch (e) {
       // error reading value
@@ -32,7 +32,7 @@ const Payments = () => {
   });
   const HandleInCommingOrder = () => {
     console.log("----rung----");
-    fetch(`https://delivigo-api.herokuapp.com/api/v5/restaurant/payout`, {
+    fetch(`https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/payout`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`, // SET HEADER IN TOKEN

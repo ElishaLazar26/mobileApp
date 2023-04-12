@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react'
 import { RadioButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RadioForm from 'react-native-simple-radio-button';
+// import RadioForm from 'react-native-simple-radio-button';
 
 const Language = () => {
+  const navigation = useNavigation()
 
   useEffect(() => {
     const backAction = () => {
@@ -33,7 +34,6 @@ const Language = () => {
       const [englishorfinnsh, setEnglish] = useState("")
     const [language, setlanguage] = useState("")
 
-    const navigation = useNavigation()
     useEffect(() => {
       AsyncStorage.setItem('language',englishorfinnsh)
     }, [englishorfinnsh])

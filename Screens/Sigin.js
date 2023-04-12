@@ -7,8 +7,10 @@ import {
   SafeAreaView,
   ScrollView,
   Pressable,
-  Alert,Linking
+  Alert,Linking,
+  ActivityIndicator,
 } from "react-native";
+import Toast from 'react-native-toast-message';
 import React, {useState, useEffect} from "react";
 // import Input from "./Input";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { UseTogglePasswordVisibility } from './UseTogglePasswordVisibility';
 // import local strong step 1
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button } from "react-native-paper";
 
 
 const Signin = () => {
@@ -23,16 +26,12 @@ const Signin = () => {
   const { passwordVisibility, rightIcon, handlePasswordVisibility } = UseTogglePasswordVisibility();
   const [passwordd, setPasswordd] = useState('');
   const navigation = useNavigation();
-  // step 2 state langauge 
+
   const [language, setlanguage] = useState("")
-  // const [signin, setSignin] = useState({
-  //   email: "",
-  //   password: "",
-  // });
+
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
-  // const b = () => <Text style={{fontWeight: 'bold'}}></Text>
-
+ const [isLoading, setisLoading] = useState(false)
 
   // get local stroge langauge 
   const getDatalanguage = async () => {
@@ -61,48 +60,58 @@ const Signin = () => {
   const HnadleLogin = (e) => {
     e.preventDefault();
     console.log( "email")
+    if(!email || !password)
+    {
+
+      Alert.alert('please Fill the fields')
+      // Toast.show({
+      //   type: 'success',
+      //   text1: 'Hello',
+      //   text2: 'This is some something 👋'
+      // });
+    }
+    else
+    {
+      setisLoading(true)
+      fetch(`https://delivigo-oy-api.herokuapp.com/api/v5/restaurant/login`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Email: email,
+          Password: password,
+          // Email: "fk.support@gmail.com",
+          // Password: "123456789",
+  
+          DeviceToken: "postman"
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          data.ResultMessages?.map((message) => {
+            if(message.MessageType === "success")
+            {
+              AsyncStorage.setItem('token',data.token)
+              setisLoading(false)
+       
+                Alert.alert(message.Message)             
+                navigation.replace("Incoming")
+
+  
+              
+            }
+            else if(message.MessageType === "danger") 
+            {
+              Alert.alert(message.Message)
+            }
+          })
+        })
+    }
 
     
-    fetch(`https://delivigo-api.herokuapp.com/api/v5/restaurant/login`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Email: "fk.support@gmail.com",
-        Password: "123456789",
-        DeviceToken: "postman"
-      }),
-    })
-      .then((res) => res.json())
-      .then(async (data)=>{
-        console.log('login data', data);
-        try {
-           const alertmessage = data.ResultMessages?.map((message) => {
-              // console.log(message.MessageType)
-              // Alert.alert(message.Message)
-              if(message.MessageType === "success")
-              {
-                Alert.alert(message.Message)
-               AsyncStorage.setItem('token',data.token)
-            
-                // localStorage.setItem("admin", JSON.stringify(data.result)); // // saving admin in localStorage
-                navigation.navigate('Incoming',{Language:text.english})
-              }
-              else if(message.MessageType === "danger")
-              {
-                Alert.alert(message.Message)
-    
-              }
-            })
-          // await AsyncStorage.setItem('token',data.token)
-          console.log(data)
-          // navigation.navigate('Incoming')
-        } catch (e) {
-          console.log("error hai",e)
-           Alert(e)
-        }
- })
+
+
        };
 
        const [text, setText] = useState({
@@ -243,6 +252,7 @@ const Signin = () => {
         <View style={{ width: "90%", flexDirection: 'row', justifyContent: 'flex-end', marginTop: 20, marginLeft: 10 }}>
              <Text style={{ fontSize: 15, fontWeight: '400' }}>{language === 'english' ? "Forget Password": "Unohditko salasanasi" }</Text>
          </View>
+       
          <View style={{ width: "90%", flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginLeft: 10 }}>
          <Text style={{ fontSize: 15, fontWeight: '400', width: 300, textAlign: "center" }}>{language === 'english' ? "By continuing, you agree to Reilu Kuljetus": "Jatkamalla hyväksyt Reilu kuljetuksen" }
           <Text onPress={() => Linking.openURL('https://www.reilukuljetus.fi/terms')} style={{ fontWeight: '700' }}>
@@ -253,14 +263,25 @@ const Signin = () => {
 
          </View>
 
-<View>
-<Text
-        // onPress={() => navigation.navigate('Incoming')}
-        onPress={HnadleLogin}
-         style={{ color: 'white', backgroundColor: '#2973CC', width: "90%", height: 50, fontWeight: '300', fontSize: 17, textAlign: 'center', borderRadius: 25, paddingTop: 10, flexDirection: 'row', justifyContent: 'center',marginTop: 40, marginLeft: 20, }}>
-         {language === 'english' ? " submit": " Lähetä" }</Text>
 
-</View>
+
+{isLoading ? <View style={{marginTop:40}}>
+  <ActivityIndicator size="large" />
+</View> : <View>
+  
+  <Text
+   
+    onPress={HnadleLogin}
+     style={{ color: 'white', backgroundColor: '#2973CC', width: "90%", height: 50, fontWeight: '300', fontSize: 17, textAlign: 'center', borderRadius: 25, paddingTop: 10, flexDirection: 'row', justifyContent: 'center',marginTop: 40, marginLeft: 20, }}>
+ 
+
+     
+    {language === 'english' ? " submit": " Lähetä" } 
+    </Text>
+</View>  }
+
+
+
 
 <View style={{flexDirection:'row',justifyContent:'center',marginTop:20,marginBottom:30}}>
            <Image source={require('../assets/contactpic.png')}
@@ -276,6 +297,17 @@ const Signin = () => {
 
 export default Signin;
 
+const styles3 = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+});
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
@@ -297,6 +329,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         width: '90%'
     }
+    
 })
 
 
